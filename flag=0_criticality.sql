@@ -1,0 +1,2 @@
+--insert into [0WO By AssetCriticality]Select CONCAT(aa.[AssetClass],'-',aa.[MANUFACTURERID],'-',aa.[MakeModel]) as Segment,count(assetnum)AssetCount,case when ECRRanking=1 then 1when ECRRanking=2 then 2when ECRRanking=3 then 3when ECRRanking =0 or ECRRanking is null then 4 end as Criticality,SiteId from [dbo].[PMO_3410012] aa where isflag=0 and SiteId='Daf'group  by  CONCAT(aa.[AssetClass],'-',aa.[MANUFACTURERID],'-',aa.[MakeModel]),ECRRanking,SiteId
+

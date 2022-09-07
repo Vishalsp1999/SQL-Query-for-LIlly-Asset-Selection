@@ -2,6 +2,8 @@ select * into Assets_with_high_criticality_bot_no_pm_wo_PRD1
 from [Honda_Repository].dbo.Assets_with_high_criticality_bot_no_pm_wo
 where 1=2 
 
+Select * from [dbo].Assets_with_high_criticality_bot_no_pm_wo
+
 --truncate table [dbo].Assets_with_high_criticality_bot_no_pm_wo
  insert into  [dbo].Assets_with_high_criticality_bot_no_pm_wo
 select distinct CMMS_Asset_ID,NONPM_count,case when pmactlabhrs>0 then 'YES' else 'NO' end 'NONPM(YES/NO)' ,aa.siteid,aa.dept
@@ -26,8 +28,8 @@ when ECRRanking=2 then 2
 when ECRRanking=3 then 3
 when ECRRanking =0 or ECRRanking is null then 4 
 end 'priority_description'--,sid
-from [Lilly_Repository_25-08].[dbo].[AX_Asset_Metric_Facts] aa
-left join [Lilly_Repository_25-08].[dbo].[PMO_3410012_DAF] a on aa.CMMS_Asset_ID=a.assetnum 
+from [Lilly_Repository_3years].[dbo].[AX_Asset_Metric_Facts] aa
+left join [Lilly_Repository_3years].[dbo].[PMO_3410012_DAF] a on aa.CMMS_Asset_ID=a.assetnum 
 where aa.siteid='DAF'
 --a.Effective_Currentflag='Y' and 
 --a.StatusId='Active' 
@@ -102,8 +104,8 @@ drop table
 [dbo].[Assets_with_low_criticality_and_high_pm_hrs1]
 -----------------------------LowCriticality-----------------------
 
-select * from [dbo].[Assets_with_low_criticality_and_high_pm_hrs_DAF1]
-
+select * from [dbo].[Assets_with_low_criticality_and_high_pm_hrs]
+Select * from [AX_Asset_Metric_Facts] where siteid='DAF'
 
 select * into [dbo].[Assets_with_low_criticality_and_high_pm_hrs]
 from  [Honda_Repository].[dbo].[Assets_with_low_criticality_and_high_pm_hrs]
@@ -133,8 +135,8 @@ when ECRRanking=2 then 2
 when ECRRanking=3 then 3
 when ECRRanking =0 or ECRRanking is null then 4 
 end 'priority_description'
-from [dbo].[AX_Asset_Metric_Facts] aa
-left join [dbo].[PMO_3410012_DAF] a on aa.CMMS_Asset_ID=a.assetnum 
+from [Lilly_Repository_3years].[dbo].[AX_Asset_Metric_Facts] aa
+left join [Lilly_Repository_3years].[dbo].[PMO_3410012_DAF] a on aa.CMMS_Asset_ID=a.assetnum 
 where aa.siteid='DAF'
 --a.Effective_Currentflag='Y' and 
 --StatusId='Active'
@@ -145,7 +147,6 @@ select * from Ax_Asset_Master
 select * from [Honda_Repository].[dbo].[Assets_with_low_criticality_and_high_pm_hrs1]
 
 select * from [Assets_with_low_criticality_and_high_pm_hrs1]
-
 
 drop table [dbo].[Assets_with_high_criticality_bot_no_pm_wo],[dbo].[Assets_with_low_criticality_and_high_pm_hrs],[dbo].[AX_Asset_Metric_Facts],
 [dbo].[AX_Asset_Saving],[dbo].[AX_Segment_Metric_Facts],[dbo].[Segment_Objects]
